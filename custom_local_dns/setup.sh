@@ -8,12 +8,12 @@
 # TODO: Create a zip or tar.gz archive that has all the setup files
 download() {
     echo 'Downloading setup files...'
-    echo 'TODO:'
+    wget -P ~/dev/antlet_local_dns https://github.com/lreading/antsle-scripts/raw/master/custom_local_dns/scripts.tar.gz
 }
 
 extract() {
     echo 'Extracting setup files...'
-    echo 'TODO:'
+    tar -xf scripts.tar.gz
 }
 
 restart() {
@@ -24,9 +24,19 @@ restart() {
     echo 'should now be discoverable on your network.'
 }
 
+uninstall() {
+    rc-service antlet_local_dns stop
+    rc-update del /etc/init.d/antlet_local_dns default
+    rm -f /usr/local/bin/antlet_local_dnsd
+    rm -f /usr/local/bin/custom_local_dns.py
+    rm -f /etc/init.d/antlet_local_dns
+    rm -f /etc/nginx/virtualhosts/custom.dns.local.template
+}
+
 install() {
     echo 'Installing setup files'
-    echo 'TODO:'
+    download()
+    extract()
     
     cp ./antlet_local_dnsd /usr/local/bin/antlet_local_dnsd
     chmod +x /usr/local/bin/antlet_local_dnsd
@@ -36,6 +46,8 @@ install() {
 
     cp ./antlet_local_dns /etc/init.d/antlet_local_dns
     chmod +x /etc/init.d/antlet_local_dns
+
+    cp ./custom.dns.local.template /etc/nginx/virtualhosts/custom.dns.local.template
 
     # Configure this service to run on boot
     rc-update add /etc/init.d/antlet_local_dns default
@@ -57,9 +69,10 @@ help() {
     echo ''
     echo ''
     echo 'Commands:'
-    echo '      -h | --help     Shows the help'
-    echo '      -r | --restart  Restarts the service to apply new nginx configs'
-    echo '      default         Downloads sources and installs'
+    echo '      -h | --help         Shows the help'
+    echo '      -r | --restart      Restarts the service to apply new nginx configs'
+    echo '      -u | --uninstall    Uninstalls this service'
+    echo '      default             Downloads sources and installs'
 }
 
 case "$1" in
@@ -69,6 +82,10 @@ case "$1" in
         ;;
     -r | --restart)
         restart()
+        exit 0
+        ;;
+    -u | --uninstall)
+        uninstall()
         exit 0
         ;;
     *)
