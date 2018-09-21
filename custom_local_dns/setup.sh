@@ -34,8 +34,8 @@ uninstall() {
 
 install() {
     echo 'Installing setup files'
-    download()
-    extract()
+    download
+    extract
     
     cp ./antlet_local_dnsd /usr/local/bin/antlet_local_dnsd
     chmod +x /usr/local/bin/antlet_local_dnsd
@@ -50,10 +50,10 @@ install() {
 
     # Configure this service to run on boot
     rc-update add /etc/init.d/antlet_local_dns default
-    restart()
+    restart
 }
 
-help() {
+print_help() {
     echo 'Help: Antlet Custom Local DNS'
     echo ''
     echo 'This script sets up functionality to be able to create'
@@ -76,19 +76,19 @@ help() {
 
 case "$1" in
     -h | --help)
-        help()
+        print_help
         exit 0
         ;;
     -r | --restart)
-        restart()
+        restart
         exit 0
         ;;
     -u | --uninstall)
-        uninstall()
+        uninstall
         exit 0
         ;;
     *)
-        install()
+        install
         exit 0
         ;;
 esac
