@@ -5,7 +5,6 @@
 # Run this script with -h or --help to learn how to configure them 
 #
 
-# TODO: Create a zip or tar.gz archive that has all the setup files
 download() {
     echo 'Downloading setup files...'
     wget -P ~/dev/antlet_local_dns https://github.com/lreading/antsle-scripts/raw/master/custom_local_dns/scripts.tar.gz
