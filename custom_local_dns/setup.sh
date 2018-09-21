@@ -35,6 +35,7 @@ uninstall() {
 install() {
     echo 'Installing setup files'
     download
+    cd ~/dev/antlet_local_dns
     extract
     
     cp ./antlet_local_dnsd /usr/local/bin/antlet_local_dnsd
