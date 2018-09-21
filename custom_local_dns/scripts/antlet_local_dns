@@ -1,0 +1,23 @@
+#!/sbin/openrc-run
+# Copyright 1999-2016 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
+depend() {
+  need net
+  need libvirtd
+  need sshd
+  need zfs-mount
+}
+
+start() {
+  ebegin "Starting Custom Local DNS"
+  start-stop-daemon --background --start --exec /usr/local/bin/antlet_local_dnsd --make-pidfile --pidfile /tmp/antlet_local_dnsd.pid
+  eend $?
+}
+
+stop() {
+  ebegin "Stopping Custom Local DNS"
+  start-stop-daemon --stop --exec /usr/local/bin/antlet_local_dnsd --pidfile /tmp/antlet_local_dnsd.pid
+  eend $?
+}
