@@ -1,5 +1,5 @@
 #!/bin/bash
-#
+
 # This file will configure your Antsle to broadcast 
 # custom .local DNS entries for your antlets.
 # Run this script with -h or --help to learn how to configure them 
