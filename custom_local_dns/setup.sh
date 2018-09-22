@@ -7,13 +7,12 @@
 
 download() {
     echo 'Downloading setup files...'
-    wget -P ~/dev/ https://github.com/lreading/antsle-scripts/raw/master/custom_local_dns/scripts.tar.gz
+    wget -P ~/dev/antlet_local_dns https://github.com/lreading/antsle-scripts/raw/master/custom_local_dns/scripts.tar.gz
 }
 
 extract() {
     echo 'Extracting setup files...'
-    tar -xf ~/dev/scripts.tar.gz -C ~/dev
-    mv ~/dev/scripts ~/dev/antlet_local_dns
+    tar -xf scripts.tar.gz
 }
 
 restart() {
@@ -37,6 +36,7 @@ uninstall() {
 install() {
     echo 'Installing setup files'
     download
+    cd ~/dev/antlet_local_dns
     extract
     
     cp ~/dev/antlet_local_dns/antlet_local_dnsd /usr/local/bin/antlet_local_dnsd
