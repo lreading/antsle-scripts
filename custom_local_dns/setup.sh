@@ -30,6 +30,7 @@ uninstall() {
     rm -f /usr/local/bin/custom_local_dns.py
     rm -f /etc/init.d/antlet_local_dns
     rm -f /etc/nginx/virtualhosts/custom.dns.local.template
+    rm -rf ~/dev/antlet_local_dns
 }
 
 install() {
@@ -38,16 +39,16 @@ install() {
     cd ~/dev/antlet_local_dns
     extract
     
-    cp ./antlet_local_dnsd /usr/local/bin/antlet_local_dnsd
+    cp ~/dev/antlet_local_dns/antlet_local_dnsd /usr/local/bin/antlet_local_dnsd
     chmod +x /usr/local/bin/antlet_local_dnsd
 
-    cp ./custom_local_dns.py /usr/local/bin/custom_local_dns.py
+    cp ~/dev/antlet_local_dns/custom_local_dns.py /usr/local/bin/custom_local_dns.py
     chmod +x /usr/local/bin/custom_local_dns.py
 
-    cp ./antlet_local_dns /etc/init.d/antlet_local_dns
+    cp ~/dev/antlet_local_dns/antlet_local_dns /etc/init.d/antlet_local_dns
     chmod +x /etc/init.d/antlet_local_dns
 
-    cp ./custom.dns.local.template /etc/nginx/virtualhosts/custom.dns.local.template
+    cp ~/dev/antlet_local_dns/custom.dns.local.template /etc/nginx/virtualhosts/custom.dns.local.template
 
     # Configure this service to run on boot
     rc-update add /etc/init.d/antlet_local_dns default
